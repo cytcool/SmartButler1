@@ -35,4 +35,5 @@ public class MyUser extends BmobUser {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
 }

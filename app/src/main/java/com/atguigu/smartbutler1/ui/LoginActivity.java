@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.atguigu.smartbutler1.MainActivity;
 import com.atguigu.smartbutler1.R;
 import com.atguigu.smartbutler1.entity.MyUser;
+import com.atguigu.smartbutler1.view.CustomDialog;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -30,6 +32,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btn_login;
     private CheckBox keep_password;
     private TextView tv_forget;
+
+    private CustomDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         et_password = (EditText) findViewById(R.id.et_password);
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
+
+        dialog = new CustomDialog(this,300,300,R.layout.dialog_loading,R.style.Theme_dialog, Gravity.CENTER,R.style.pop_anim_style);
+        dialog.setCancelable(false);
 
         keep_password = (CheckBox) findViewById(R.id.keep_password);
 
@@ -75,12 +82,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //2.判断是否为空
                 if (!TextUtils.isEmpty(name) & !TextUtils.isEmpty(password)) {
                     //登录
+                    dialog.show();
                     final MyUser user = new MyUser();
                     user.setUsername(name);
                     user.setPassword(password);
                     user.login(new SaveListener<MyUser>() {
                         @Override
                         public void done(MyUser myUser, BmobException e) {
+                            dialog.dismiss();
                             //判断结果
                             if (e == null) {
                                 //判断邮箱是否验证

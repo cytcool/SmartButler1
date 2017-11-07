@@ -8,9 +8,12 @@ import android.util.Log;
 
 public class L {
 
-    public static final boolean DEBUG = true;
+    //开关
+    public static final  boolean DEBUG = true;
+    //TAG
+    public static final String TAG = "Smartbutler";
 
-    public static final String TAG = "SmartButler";
+    //五个等级  DIWE
 
     public static void d(String text){
         if(DEBUG){
@@ -24,15 +27,16 @@ public class L {
         }
     }
 
-    public static void e(String text){
-        if(DEBUG){
-            Log.e(TAG,text);
-        }
-    }
-
     public static void w(String text){
         if(DEBUG){
             Log.w(TAG,text);
         }
     }
+
+    public static void e(String text){
+        if(DEBUG){
+            Log.e(TAG,text);
+        }
+    }
 }
+
