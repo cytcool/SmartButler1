@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.atguigu.smartbutler1.R;
 import com.atguigu.smartbutler1.entity.MyUser;
+import com.atguigu.smartbutler1.ui.CourierActivity;
 import com.atguigu.smartbutler1.ui.L;
 import com.atguigu.smartbutler1.ui.LoginActivity;
 import com.atguigu.smartbutler1.view.CustomDialog;
@@ -217,10 +218,10 @@ public class UsersFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_picture:
                 toPicture();
                 break;
-     /*       case R.id.tv_courier:
+            case R.id.tv_courier:
                 startActivity(new Intent(getActivity(), CourierActivity.class));
                 break;
-            case R.id.tv_phone:
+          /*  case R.id.tv_phone:
                 startActivity(new Intent(getActivity(), PhoneActivity.class));
                 break;*/
         }
