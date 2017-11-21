@@ -52,6 +52,8 @@
 
         <activity android:name=".ui.CourierActivity"/>
 
+        <activity android:name=".ui.PhoneActivity"/>
+
     </application>
 
 </manifest>

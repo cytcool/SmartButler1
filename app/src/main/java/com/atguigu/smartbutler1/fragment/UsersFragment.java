@@ -22,6 +22,7 @@ import com.atguigu.smartbutler1.entity.MyUser;
 import com.atguigu.smartbutler1.ui.CourierActivity;
 import com.atguigu.smartbutler1.ui.L;
 import com.atguigu.smartbutler1.ui.LoginActivity;
+import com.atguigu.smartbutler1.ui.PhoneActivity;
 import com.atguigu.smartbutler1.view.CustomDialog;
 
 import java.io.File;
@@ -218,12 +219,16 @@ public class UsersFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_picture:
                 toPicture();
                 break;
+
+            //快递查询
             case R.id.tv_courier:
                 startActivity(new Intent(getActivity(), CourierActivity.class));
                 break;
-          /*  case R.id.tv_phone:
+
+            //归属地查询
+            case R.id.tv_phone:
                 startActivity(new Intent(getActivity(), PhoneActivity.class));
-                break;*/
+                break;
         }
     }
 
