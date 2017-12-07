@@ -1,4 +1,4 @@
-package com.atguigu.smartbutler1.adapter;
+package com.atguigu.smartbutler1.entity;
 
 /**
  * Created by CYT on 2017/12/5.

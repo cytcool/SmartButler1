@@ -102,7 +102,6 @@ public class CourierActivity extends BaseActivity implements View.OnClickListene
             JSONArray jsonArray = jsonResult.getJSONArray("list");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject json = (JSONObject) jsonArray.get(i);
-
                 CourierData data = new CourierData();
                 data.setRemark(json.getString("remark"));
                 data.setZone(json.getString("zone"));

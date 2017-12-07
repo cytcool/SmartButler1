@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.atguigu.smartbutler1.R;
 import com.atguigu.smartbutler1.adapter.ChatListAdapter;
-import com.atguigu.smartbutler1.adapter.ChatListData;
+import com.atguigu.smartbutler1.entity.ChatListData;
 import com.atguigu.smartbutler1.ui.L;
 import com.atguigu.smartbutler1.utils.StaticClass;
 import com.kymjs.rxvolley.RxVolley;

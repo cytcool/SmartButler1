@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.atguigu.smartbutler1.R;
+import com.atguigu.smartbutler1.entity.ChatListData;
 
 import java.util.List;
 
