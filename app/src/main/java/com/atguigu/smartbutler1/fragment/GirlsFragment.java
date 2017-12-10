@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import com.atguigu.smartbutler1.R;
 
@@ -14,10 +15,17 @@ import com.atguigu.smartbutler1.R;
 
 public class GirlsFragment extends Fragment{
 
+    private GridView mGridView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.girls_fragmeng,null);
+        findView(view);
         return view;
+    }
+
+    private void findView(View view) {
+        mGridView = (GridView) view.findViewById(R.id.mGridView);
     }
 }
