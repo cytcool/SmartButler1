@@ -72,7 +72,7 @@ public class GrilAdapter extends BaseAdapter {
         //加载图片
         if(!TextUtils.isEmpty(data.getImgUrl())){
             //加载图片
-            PicassoUtils.loadImageViewSize(mContext, data.getImgUrl(), width/2, 250, viewHolder.imageView);
+            PicassoUtils.loadImageViewSize(mContext, data.getImgUrl(), width/2, 500, viewHolder.imageView);
         }
         return view;
     }
