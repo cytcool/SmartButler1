@@ -1,15 +1,19 @@
 package com.atguigu.smartbutler1.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.atguigu.smartbutler1.R;
 import com.atguigu.smartbutler1.entity.WeChatData;
+import com.atguigu.smartbutler1.utils.PicassoUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -24,10 +28,17 @@ public class WeChatAdapter extends BaseAdapter {
     private List<WeChatData> mList;
     private WeChatData mdata;
 
+    private int width,height;
+    private WindowManager wm;
+
     public WeChatAdapter(Context mContext,List<WeChatData> mList){
         this.mContext = mContext;
         this.mList = mList;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        width = wm.getDefaultDisplay().getWidth();
+        height = wm.getDefaultDisplay().getHeight();
     }
 
 
@@ -64,6 +75,13 @@ public class WeChatAdapter extends BaseAdapter {
         mdata = mList.get(i);
         viewHolder.tv_title.setText(mdata.getTitle());
         viewHolder.tv_source.setText(mdata.getSource());
+
+        //加载图片
+        if(!TextUtils.isEmpty(mdata.getImgurl())){
+            //加载图片
+            PicassoUtils.loadImageViewSize(mContext, mdata.getImgurl(), width/3, 250, viewHolder.iv_img);
+        }
+       // Picasso.with(mContext).load(mdata.getImgurl()).into(viewHolder.iv_img);
 
         return view;
     }
