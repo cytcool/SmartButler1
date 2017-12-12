@@ -26,4 +26,7 @@ public class StaticClass {
 
     //妹子接口
     public static final String GIRL_URL ="http://gank.io/api/search/query/listview/category/count/50/page/1";
+
+    //语音Key
+    public static final String VOICE_KEY = "5a2fd92d";
 }
