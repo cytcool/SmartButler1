@@ -77,6 +77,8 @@
 
         <activity android:name=".ui.PhoneActivity"/>
 
+        <service android:name=".service.SmsService"/>
+
     </application>
 
 </manifest>

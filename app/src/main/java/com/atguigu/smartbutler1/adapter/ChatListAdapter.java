@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.atguigu.smartbutler1.R;
 import com.atguigu.smartbutler1.entity.ChatListData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class ChatListAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private ChatListData data;
-    private List<ChatListData> mList;
+    private List<ChatListData> mList = new ArrayList<>();
 
 
     public ChatListAdapter(Context mContext,List<ChatListData> mList){
