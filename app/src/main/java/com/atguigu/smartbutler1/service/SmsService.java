@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.telephony.SmsMessage;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.atguigu.smartbutler1.R;
 import com.atguigu.smartbutler1.ui.L;
 import com.atguigu.smartbutler1.utils.StaticClass;
+import com.atguigu.smartbutler1.view.DispatchLinearLayout;
 
 /**
  * Created by CYT on 2017/12/14.
@@ -35,11 +37,18 @@ public class SmsService extends Service implements View.OnClickListener {
     //布局参数
     private WindowManager.LayoutParams layoutParams;
     //添加布局
-    private View mView;
+    private DispatchLinearLayout mView;
 
     private TextView tv_phone;
     private TextView tv_content;
     private Button btn_send_sms;
+
+    public static final String SYSTEM_DIALOGS_RESON_KEY = "reason";
+    public static final String SYSTEM_DIALOGS_HOME_KEY = "homekey";
+
+    private HomeWatchReceiver mHomeWatchReceiver;
+
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -63,6 +72,11 @@ public class SmsService extends Service implements View.OnClickListener {
         intent.setPriority(Integer.MAX_VALUE);
         //注册
         registerReceiver(smsRecevier,intent);
+
+        mHomeWatchReceiver = new HomeWatchReceiver();
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+        registerReceiver(mHomeWatchReceiver, intentFilter);
+
     }
 
     @Override
@@ -70,6 +84,7 @@ public class SmsService extends Service implements View.OnClickListener {
         super.onDestroy();
         //注销
         unregisterReceiver(smsRecevier);
+        unregisterReceiver(mHomeWatchReceiver);
     }
 
     @Override
@@ -135,7 +150,9 @@ public class SmsService extends Service implements View.OnClickListener {
         //定义类型
         layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
         //加载布局
-        mView = View.inflate(getApplicationContext(), R.layout.sms_item,null);
+        mView = (DispatchLinearLayout) View.inflate(getApplicationContext(), R.layout.sms_item,null);
+
+
         tv_phone = (TextView) mView.findViewById(R.id.tv_phone);
         tv_content = (TextView) mView.findViewById(R.id.tv_content);
         btn_send_sms = (Button) mView.findViewById(R.id.btn_send_sms);
@@ -148,5 +165,42 @@ public class SmsService extends Service implements View.OnClickListener {
 
         //添加View到窗口
         wm.addView(mView,layoutParams);
+
+        mView.setDispatchKeyEventListener(mDispatchKeyEventListener);
+
+    }
+
+    private DispatchLinearLayout.DispatchKeyEventListener mDispatchKeyEventListener
+            = new DispatchLinearLayout.DispatchKeyEventListener() {
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent event) {
+            //判断是否是按返回键
+            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+                L.i("我按了BACK键");
+                if (mView.getParent() != null) {
+                    wm.removeView(mView);
+                }
+                return true;
+            }
+            return false;
+        }
+    };
+
+    //监听Home键的广播
+    class HomeWatchReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
+                String reason = intent.getStringExtra(SYSTEM_DIALOGS_RESON_KEY);
+                if (SYSTEM_DIALOGS_HOME_KEY.equals(reason)) {
+                    L.i("我点击了HOME键");
+                    if (mView.getParent() != null) {
+                        wm.removeView(mView);
+                    }
+                }
+            }
+        }
     }
 }
