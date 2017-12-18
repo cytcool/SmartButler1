@@ -141,6 +141,10 @@ public class SmsService extends Service implements View.OnClickListener {
         btn_send_sms = (Button) mView.findViewById(R.id.btn_send_sms);
         btn_send_sms.setOnClickListener(this);
 
+        //设置数据
+        tv_phone.setText("发送人：" + smsPhone);
+        tv_content.setText(smsContent);
+
 
         //添加View到窗口
         wm.addView(mView,layoutParams);
