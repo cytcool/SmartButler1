@@ -8,8 +8,10 @@ import android.widget.Switch;
 
 import com.atguigu.smartbutler1.R;
 import com.atguigu.smartbutler1.service.SmsService;
+import com.atguigu.smartbutler1.utils.ShareUtils;
 
-import static com.atguigu.smartbutler1.ui.ShareUtils.getBoolean;
+import static com.atguigu.smartbutler1.utils.ShareUtils.getBoolean;
+
 
 /**
  * Created by 陈雨田 on 2017/8/29.

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.atguigu.smartbutler1.MainActivity;
 import com.atguigu.smartbutler1.R;
 import com.atguigu.smartbutler1.entity.MyUser;
+import com.atguigu.smartbutler1.utils.ShareUtils;
 import com.atguigu.smartbutler1.view.CustomDialog;
 
 import cn.bmob.v3.exception.BmobException;
@@ -61,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         keep_password = (CheckBox) findViewById(R.id.keep_password);
 
-        boolean isChecked =ShareUtils.getBoolean(this,"keeppass",true);
+        boolean isChecked = ShareUtils.getBoolean(this,"keeppass",true);
         keep_password.setChecked(isChecked);
         if(isChecked){
             et_name.setText(ShareUtils.getString(this,"name",""));

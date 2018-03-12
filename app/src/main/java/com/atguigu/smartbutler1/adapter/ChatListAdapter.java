@@ -10,12 +10,8 @@ import android.widget.TextView;
 import com.atguigu.smartbutler1.R;
 import com.atguigu.smartbutler1.entity.ChatListData;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by CYT on 2017/12/5.
- */
 
 public class ChatListAdapter extends BaseAdapter {
 
@@ -25,20 +21,16 @@ public class ChatListAdapter extends BaseAdapter {
     public static final int VALUE_RIGHT_TEXT = 2;
 
     private Context mContext;
-    private LayoutInflater mLayoutInflater;
+    private LayoutInflater inflater;
     private ChatListData data;
-    private List<ChatListData> mList = new ArrayList<>();
+    private List<ChatListData> mList;
 
-
-    public ChatListAdapter(Context mContext,List<ChatListData> mList){
+    public ChatListAdapter(Context mContext, List<ChatListData> mList) {
         this.mContext = mContext;
         this.mList = mList;
         //获取系统服务
-        mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+        inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
-
 
     @Override
     public int getCount() {
@@ -46,61 +38,61 @@ public class ChatListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return mList.get(i);
+    public Object getItem(int position) {
+        return mList.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-
+    public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolderLeftText viewHolderLeftText = null;
         ViewHolderRightText viewHolderRightText = null;
-        int type = getItemViewType(i);
-        if (view == null){
-            switch (type){
+        //获取当前要显示的type 根据这个type来区分数据的加载
+        int type = getItemViewType(position);
+        if (convertView == null) {
+            switch (type) {
                 case VALUE_LEFT_TEXT:
                     viewHolderLeftText = new ViewHolderLeftText();
-                    view = mLayoutInflater.inflate(R.layout.left_item,null);
-                    viewHolderLeftText.tv_left_text = (TextView) view.findViewById(R.id.tv_left_text);
-                    view.setTag(viewHolderLeftText);
+                    convertView = inflater.inflate(R.layout.left_item, null);
+                    viewHolderLeftText.tv_left_text = (TextView) convertView.findViewById(R.id.tv_left_text);
+                    convertView.setTag(viewHolderLeftText);
                     break;
                 case VALUE_RIGHT_TEXT:
                     viewHolderRightText = new ViewHolderRightText();
-                    view = mLayoutInflater.inflate(R.layout.right_item,null);
-                    viewHolderRightText.tv_right_text = (TextView) view.findViewById(R.id.tv_right_text);
-                    view.setTag(viewHolderLeftText);
+                    convertView = inflater.inflate(R.layout.right_item, null);
+                    viewHolderRightText.tv_right_text = (TextView) convertView.findViewById(R.id.tv_right_text);
+                    convertView.setTag(viewHolderRightText);
                     break;
             }
-        }else {
-            switch (type){
+        } else {
+            switch (type) {
                 case VALUE_LEFT_TEXT:
-                    viewHolderLeftText = (ViewHolderLeftText) view.getTag();
+                    viewHolderLeftText = (ViewHolderLeftText) convertView.getTag();
                     break;
                 case VALUE_RIGHT_TEXT:
-                    viewHolderRightText = (ViewHolderRightText) view.getTag();
+                    viewHolderRightText = (ViewHolderRightText) convertView.getTag();
                     break;
             }
         }
 
         //赋值
-        ChatListData data = mList.get(i);
+        ChatListData data = mList.get(position);
         switch (type){
             case VALUE_LEFT_TEXT:
                 viewHolderLeftText.tv_left_text.setText(data.getText());
                 break;
             case VALUE_RIGHT_TEXT:
                 viewHolderRightText.tv_right_text.setText(data.getText());
+                break;
         }
-
-        return view;
+        return convertView;
     }
 
-    //根据数据源的position来返回显示的item
+    //根据数据源的positiion来返回要显示的item
     @Override
     public int getItemViewType(int position) {
         ChatListData data = mList.get(position);
@@ -108,19 +100,19 @@ public class ChatListAdapter extends BaseAdapter {
         return type;
     }
 
-    //返回所有的Layout数据
+    //返回所有的layout数据
     @Override
     public int getViewTypeCount() {
-        return mList.size()+1;
+        return 3; //mlisy.size + 1
     }
 
-    //左边的ViewHolder
-    class ViewHolderLeftText{
+    //左边的文本
+    class ViewHolderLeftText {
         private TextView tv_left_text;
     }
 
-    //右边的ViewHolder
-    class ViewHolderRightText{
+    //右边的文本
+    class ViewHolderRightText {
         private TextView tv_right_text;
     }
 }

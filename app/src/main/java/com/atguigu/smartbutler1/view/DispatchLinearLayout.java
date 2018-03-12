@@ -39,4 +39,12 @@ public class DispatchLinearLayout extends LinearLayout{
     public static interface DispatchKeyEventListener{
         boolean dispatchKeyEvent(KeyEvent event);
     }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (dispatchKeyEventListener != null){
+            return dispatchKeyEventListener.dispatchKeyEvent(event);
+        }
+        return super.dispatchKeyEvent(event);
+    }
 }
