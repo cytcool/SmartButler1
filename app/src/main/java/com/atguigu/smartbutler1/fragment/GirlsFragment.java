@@ -25,8 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,15 +72,16 @@ public class GirlsFragment extends Fragment {
                 R.style.Theme_dialog, Gravity.CENTER,R.style.pop_anim_style);
         iv_img = (ImageView) dialog.findViewById(R.id.iv_img);
 
-        String welfare = null;
+       /* String welfare = null;
         try {
             //Gank升級 需要转码
             welfare = URLEncoder.encode(getString(R.string.text_welfare), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }
+        }*/
         //解析
-        RxVolley.get("http://gank.io/api/search/query/listview/category/"+welfare+"/count/50/page/1", new HttpCallback() {
+        String url1 = "http://gank.io/api/data/福利/10/1";
+        RxVolley.get(url1, new HttpCallback() {
             @Override
             public void onSuccess(String t) {
                 L.i("Girl Json:" + t);

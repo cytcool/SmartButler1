@@ -23,7 +23,11 @@ import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
+import com.kymjs.rxvolley.client.HttpParams;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,13 +111,14 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
                         //5.添加你输入的内容到right item
                         addRightItem(text);
                         //6.发送给机器人请求返回内容
-                        String url = "http://op.juhe.cn/robot/index?info=" + text
-                                + "&key=" + StaticClass.CHAT_LIST_KEY;
-                        RxVolley.get(url, new HttpCallback() {
+                        String url= "http://www.tuling123.com/openapi/api";
+                        String key= "009c3c0e31d54bb3b96716704e48f326";
+                        HttpParams params = new HttpParams();
+                        params.put("key",key);
+                        params.put("info",text);
+                        RxVolley.post(url, params, new HttpCallback() {
                             @Override
                             public void onSuccess(String t) {
-                                //Toast.makeText(getActivity(), "Json:" + t, Toast.LENGTH_SHORT).show();
-                                L.i("Json" + t);
                                 parsingJson(t);
                             }
                         });
@@ -127,7 +132,16 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
 
     //解析Json
     private void parsingJson(String t) {
-
+        try {
+            JSONObject jsonObhect = new JSONObject(t);
+            JSONObject jsonresult = jsonObhect.getJSONObject("results");
+            //拿到返回值
+            String text = jsonresult.getString("text");
+            //7.拿到机器人的返回值之后添加在left item
+            addLeftItem(text);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     //添加左边文本
