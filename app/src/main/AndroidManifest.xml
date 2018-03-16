@@ -79,6 +79,10 @@
 
         <activity android:name=".ui.WebViewActivity"/>
 
+        <activity android:name=".ui.QrCodeActivity"
+            android:label="我的二维码"
+            />
+
         <service android:name=".service.SmsService"/>
 
     </application>
