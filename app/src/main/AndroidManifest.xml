@@ -38,6 +38,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- SD卡读取权限，用户写入离线定位数据-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+
     <application
         android:name=".application.BaseApplication"
         android:allowBackup="true"
@@ -83,7 +85,14 @@
             android:label="我的二维码"
             />
 
+        <activity android:name=".ui.LocationActivity"
+            android:label="我的位置"/>
+
         <service android:name=".service.SmsService"/>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="fTeGLIAhcCK6rcA0gdBraBVI6x9OKXxH	" />
 
     </application>
 

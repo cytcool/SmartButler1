@@ -18,6 +18,11 @@ android {
         }
     }
 }
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -49,4 +54,5 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:1.3.0'
     implementation files('libs/Msc.jar')
     compile project(path: ':libzxing')
+    implementation files('libs/BaiduLBS_Android.jar')
 }
