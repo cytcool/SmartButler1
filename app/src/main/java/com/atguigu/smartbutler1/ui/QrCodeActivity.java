@@ -10,6 +10,8 @@ import com.atguigu.smartbutler1.R;
 import com.xys.libzxing.zxing.encoding.EncodingUtils;
 
 
+
+
 /**
  * Created by CYT on 2018/3/16.
  */

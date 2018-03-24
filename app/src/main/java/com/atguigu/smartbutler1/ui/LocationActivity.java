@@ -2,7 +2,6 @@ package com.atguigu.smartbutler1.ui;
 
 import android.os.Bundle;
 
-
 import com.atguigu.smartbutler1.R;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -20,6 +19,7 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 
 import java.util.List;
+
 
 /**
  * Created by CYT on 2018/3/16.
@@ -189,7 +189,7 @@ public class LocationActivity extends BaseActivity{
             //定义Maker坐标点
             LatLng point = new LatLng(location.getLatitude(),location.getLongitude());
             //构建Marker图标
-            BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_location);
+            BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_my_location);
             //构建MarkerOption，用于在地图上添加Marker
             OverlayOptions option = new MarkerOptions().position(point).icon(bitmap);
             //在地图上添加Marker，并显示
